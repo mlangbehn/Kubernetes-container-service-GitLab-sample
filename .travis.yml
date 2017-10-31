@@ -21,6 +21,7 @@ env:
   - TEST_RUN="./tests/test-docker-compose.sh"
   - TEST_RUN="./tests/test-kubeadm-dind-cluster.sh"
   - TEST_RUN="./tests/test-kubernetes.sh"
+  - TEST_RUN="./tests/test-minikube.sh"
 
 before_install:
   - pip install -U -r test-requirements.txt

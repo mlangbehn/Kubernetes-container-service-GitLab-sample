@@ -6,17 +6,22 @@
 # shellcheck disable=SC1090
 source "$(dirname "$0")"/../scripts/resources.sh
 
+echo "Install kubectl"
+curl -LO https://storage.googleapis.com/kubernetes-release/release/"$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"/bin/linux/amd64/kubectl
+chmod 0755 kubectl
+sudo mv kubectl /usr/local/bin
+
+echo "Install minikube"
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+chmod 0755 minikube
+sudo mv minikube /usr/local/bin/
+
 is_pull_request "$0"
 
 echo "Install Bluemix CLI"
 curl -L https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/latest/Bluemix_CLI_amd64.tar.gz > Bluemix_CLI.tar.gz
 tar -xvf Bluemix_CLI.tar.gz
 sudo ./Bluemix_CLI/install_bluemix_cli
-
-echo "Install kubectl"
-curl -LO https://storage.googleapis.com/kubernetes-release/release/"$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"/bin/linux/amd64/kubectl
-chmod 0755 kubectl
-sudo mv kubectl /usr/local/bin
 
 echo "Install the Bluemix container-service plugin"
 bx plugin install container-service -r Bluemix
